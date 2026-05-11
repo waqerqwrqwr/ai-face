@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台</title>
+    <style>
+        body{max-width:500px;margin:0 auto;padding:30px;font-family:Arial}
+        input{width:100%;padding:14px;margin:10px 0;border:1px solid #ddd;border-radius:10px}
+        button{background:#ff5c8d;color:white;width:100%;padding:14px;border:none;border-radius:10px}
+        .admin{display:none;margin-top:30px}
+    </style>
+</head>
+<body>
+    <h2>后台登录</h2>
+    <input type="password" id="pwd" placeholder="输入密码">
+    <button onclick="login()">登录</button>
+
+    <div class="admin" id="admin">
+        <h2>管理中心</h2>
+        <p>价格：19.9元</p>
+        <p>状态：已上线</p>
+    </div>
+
+<script>
+    function login(){
+        let p = document.getElementById('pwd').value;
+        if(p == '123456'){
+            document.getElementById('admin').style.display = 'block';
+        }else{
+            alert('密码错误');
+        }
+    }
+</script>
+</body>
+</html>
