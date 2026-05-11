@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI颜值测评</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family: system-ui, sans-serif}
+        body{background:#fdfdfd;max-width:500px;margin:0 auto;padding:20px;color:#222}
+        .title{text-align:center;margin:40px 0 20px}
+        .title h1{color:#ff5c8d;font-size:26px}
+        .title p{color:#666;margin-top:8px}
+        .upload{border:2px dashed #ff5c8d;border-radius:20px;padding:50px 20px;text-align:center;background:#fff;margin:30px 0}
+        .btn{background:#ff5c8d;color:white;border:none;padding:16px 30px;border-radius:50px;font-size:16px;margin-top:20px;width:100%}
+        .loading{display:none;text-align:center;margin:40px 0}
+        .result{display:none;background:white;border-radius:20px;padding:25px;margin:20px 0;box-shadow:0 0 10px #00000008}
+        .result h2{color:#ff5c8d;margin-bottom:15px}
+        .pay{display:none;position:fixed;bottom:0;left:0;right:0;background:white;border-radius:25px 25px 0 0;padding:30px;box-shadow:0 -5px 15px #00000010}
+        .pay img{width:200px;margin:20px auto;display:block}
+    </style>
+</head>
+<body>
+
+<div class="title">
+    <h1>AI智能颜值测评</h1>
+    <p>上传照片，一键生成专业报告</p>
+</div>
+
+<div class="upload" id="box">
+    <p>点击下方按钮上传照片</p>
+    <input type="file" id="file" accept="image/*" capture="camera" style="display:none">
+    <button class="btn" onclick="document.getElementById('file').click()">开始测评</button>
+</div>
+
+<div class="loading" id="loading">
+    <h3>AI分析中，请稍候...</h3>
+</div>
+
+<div class="result" id="result">
+    <h2>精简报告</h2>
+    <p>脸型：<span id="shape"></span></p>
+    <p>颜值评分：<span id="score"></span> 分</p>
+    <p style="color:red;margin-top:12px">支付19.9元解锁完整报告</p>
+    <button class="btn" onclick="showPay()">立即解锁</button>
+</div>
+
+<div class="pay" id="pay">
+    <h2>解锁完整报告</h2>
+    <p>金额：19.9元</p>
+    <img src="https://via.placeholder.com/200" id="qrcode">
+    <button class="btn" onclick="unlock()">已支付，解锁报告</button>
+</div>
+
+<script>
+    let file = document.getElementById('file');
+    let loading = document.getElementById('loading');
+    let result = document.getElementById('result');
+    let pay = document.getElementById('pay');
+
+    file.onchange = function(){
+        document.getElementById('box').style.display = 'none';
+        loading.style.display = 'block';
+        setTimeout(()=>{
+            loading.style.display = 'none';
+            result.style.display = 'block';
+            document.getElementById('shape').innerText = '鹅蛋脸';
+            document.getElementById('score').innerText = '88';
+        }, 2000);
+    }
+
+    function showPay(){ pay.style.display = 'block' }
+    function unlock(){
+        pay.style.display = 'none';
+        result.innerHTML = `
+        <h2>✅ 完整报告已解锁</h2>
+        <p>脸型：鹅蛋脸</p>
+        <p>颜值评分：88分</p>
+        <p>气质：甜美、高级、优雅</p>
+        <p>适合发型：中长发、空气刘海</p>
+        <p>适合穿搭：浅色系、温柔风</p>
+        <p>五官状态：比例协调，线条流畅</p>
+        `;
+    }
+</script>
+</body>
+</html>
